@@ -11,7 +11,8 @@ import Foundation
 
 struct API {
     
-    static func getRestaurants(completion: @escaping ([[String:Any]]?) -> Void) {
+//    static func getRestaurants(completion: @escaping ([[String:Any]]?) -> Void) {
+    static func getRestaurants(completion: @escaping ([Restaurant]?) -> Void) {
         
         // ––––– TODO: Add your own API key!
         let apikey = ""
@@ -45,19 +46,21 @@ struct API {
                 //    for each restaurant
 //                let restaurants = dataDictionary["businesses"] as! [[String: Any]]
                 
+                // Get array of restaurant dictionaries
                 let restDictionaries = dataDictionary["businesses"] as! [[String: Any]]
                 
+                // Variable to store array of Restaurants
                 var restaurants: [Restaurant] = []
                 
+                // Use each restaurant dictionary to initialize Restaurant object
                 for dictionary in restDictionaries {
                     let restaurant = Restaurant.init(dict: dictionary)
-                    restaurant.append(restaurant)
+                    restaurants.append(restaurant)
                 };
                 
                 // 3. completion is an escaping method  which allows the data to be used
                 //    outside of the closure
                 return completion(restaurants)
-                
                 }
             }
         
